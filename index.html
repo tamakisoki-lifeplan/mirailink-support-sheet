@@ -181,11 +181,11 @@
       <input type="text" name="name" autocomplete="off">
 
       <!-- 事業所選択。保存先はスプレッドシートの「ふりがな」列（見出しを「事業所」に変更して利用） -->
-      <label class="q">ご利用の事業所<span class="req">必須</span></label>
+      <label class="q">ご利用の事業所<span class="req">必須</span> <span class="note">（あてはまるものすべて）</span></label>
       <div class="choices">
-        <label class="opt"><input type="radio" name="furigana" value="みらいりんく糸満">みらいりんく糸満</label>
-        <label class="opt"><input type="radio" name="furigana" value="みらいりんく大里">みらいりんく大里</label>
-        <label class="opt"><input type="radio" name="furigana" value="みらいりんく糸満ラポール">みらいりんく糸満ラポール</label>
+        <label class="opt"><input type="checkbox" name="furigana" value="みらいりんく糸満">みらいりんく糸満</label>
+        <label class="opt"><input type="checkbox" name="furigana" value="みらいりんく大里">みらいりんく大里</label>
+        <label class="opt"><input type="checkbox" name="furigana" value="みらいりんく糸満ラポール">みらいりんく糸満ラポール</label>
       </div>
 
       <label class="q">住所 <span class="note">（沖縄県から）</span></label>
@@ -365,8 +365,8 @@
       form.name.focus();
       return;
     }
-    const facility = form.furigana.value; // 事業所
-    if (!facility) {
+    const facilityChecked = form.querySelectorAll('input[name="furigana"]:checked').length > 0;
+    if (!facilityChecked) {
       errBox.textContent = "ご利用の事業所を選んでください。";
       errBox.style.display = "block";
       errBox.scrollIntoView({ behavior: "smooth", block: "center" });
